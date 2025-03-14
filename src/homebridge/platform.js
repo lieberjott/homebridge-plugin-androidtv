@@ -234,12 +234,12 @@ class AndroidTV {
                     if(this.config.channels){
                         let channel = this.config.channels[newValue];
                         let array = this.splitChannelNumber(channel.number);
-                        device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                        device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                        device.android_remote.sendKey(RemoteKeyCode.KEYCODE_DPAD_CENTER,RemoteDirection.SHORT);
-                        await new Promise(resolve => setTimeout(resolve, 500));
+                        //device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
+                        //await new Promise(resolve => setTimeout(resolve, 500));
+                        //device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
+                        //await new Promise(resolve => setTimeout(resolve, 500));
+                        //device.android_remote.sendKey(RemoteKeyCode.KEYCODE_DPAD_CENTER,RemoteDirection.SHORT);
+                        //await new Promise(resolve => setTimeout(resolve, 500));
                         for (let button of array) {
                             this.log.info(tvName, 'Tap on ' + button + ' ' + this.channelskeys[button]);
                             device.android_remote.sendKey(this.channelskeys[button],RemoteDirection.SHORT);
