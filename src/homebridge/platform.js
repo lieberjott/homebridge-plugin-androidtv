@@ -92,7 +92,8 @@ class AndroidTV {
             this.log.info(tvName, 'set Active => setNewValue: ' + newValue);
 
             if(device.powered !==  (newValue === this.api.hap.Characteristic.Active.ACTIVE)){
-                device.android_remote.sendPower();
+                //Deactivate sending of Power command for MagentaTV one, in order to use input (channels) in Homekit scenes
+                //device.android_remote.sendPower();
             }
             tvService.updateCharacteristic(this.api.hap.Characteristic.Active, newValue);
         });
@@ -234,6 +235,7 @@ class AndroidTV {
                     if(this.config.channels){
                         let channel = this.config.channels[newValue];
                         let array = this.splitChannelNumber(channel.number);
+                        //Don't go to home for MagentaTV One
                         //device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
                         //await new Promise(resolve => setTimeout(resolve, 500));
                         //device.android_remote.sendKey(RemoteKeyCode.KEYCODE_HOME,RemoteDirection.SHORT);
@@ -243,6 +245,7 @@ class AndroidTV {
                         for (let button of array) {
                             this.log.info(tvName, 'Tap on ' + button + ' ' + this.channelskeys[button]);
                             device.android_remote.sendKey(this.channelskeys[button],RemoteDirection.SHORT);
+                            await new Promise(resolve => setTimeout(resolve, 200));
                         }
                     }
                 }
